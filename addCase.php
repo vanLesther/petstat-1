@@ -25,11 +25,11 @@ $user = $_SESSION['user'];
 </head>
 <body>
     <div class="container">
-        <h1>Pet Registration Form</h1>
-        <form method="POST" action="process_addPet.php" id="registrationForm">
+        <h1>Report Case Form</h1>
+        <form method="POST" action="process_addCase.php" id="reportCaseForm">
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" name="name" id="name" required>
+                <label for="petname" class="form-label">Name:</label>
+                <input type="text" class="form-control" name="name" id="petname" required>
             </div>
             <div class="mb-3">
                 <label for="petType" class="form-label">Pet Type:</label>

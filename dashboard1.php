@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>View Location</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -71,6 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             echo '<tr>';
                             echo '<td>' . $row['name'] . '</td>';
                             echo '<td>' . $row['email'] . '</td>';
+                            echo '<td>
+                                     <form method="post" action="proccess_viewResidentLocation.php">
+                                        <input type="hidden" name="userID" value="' . $row['residentID'] . '">
+                                        <button type="submit" name="accept" class="btn btn-success">View Location</button>
+                                    </form>
+                             </td>';
                             echo '<td>
                                     <form method="post" action="dashboard1.php">
                                         <input type="hidden" name="userID" value="' . $row['residentID'] . '">
@@ -134,6 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </tbody>
                 </table>
             </div>
+            <a href="dashboard1pet.php" class="btn btn-primary">Manage Pet</a>
+            <a href="reportCase.php" class="btn btn-primary">Report Case</a>
             <a href="logout.php" class="btn btn-primary">Logout</a>
         </div>
     </div>

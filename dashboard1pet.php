@@ -150,6 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </table>
             </div>
 
+        <a href="dashboard1.php" class="btn btn-primary">Manage User</a>
         <a href="logout.php" class="btn btn-primary">Logout</a>
         </div>
     </div>
