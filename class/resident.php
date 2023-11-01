@@ -124,5 +124,22 @@ public function getAllRejectedResidents() {
 
     return $result;
 }
+public function viewResidentLocation($userID) {
+    global $conn;
+
+    $query = "SELECT R.geoID, G.latitude, G.longitude, R.name, B.barangay
+        FROM resident R
+        INNER JOIN geolocation G ON R.geoID = G.geoID
+        INNER JOIN barangay B ON R.brgyID = B.brgyID
+        WHERE R.residentID = $userID";
+
+    $result = $conn->query($query);
+
+    if (!$result) {
+        return false; // Return false if the query fails
+    }
+
+    return $result;
+}
 }  
 ?>
