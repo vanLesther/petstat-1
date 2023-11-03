@@ -26,7 +26,7 @@ $user = $_SESSION['user'];
 <body>
     <div class="container">
         <h1>Report case</h1>
-        <form method="POST" action="addCase.php" id="reportCaseForm">
+        <form method="POST" action="addBiteCase.php" id="reportCaseForm">
             <input type="submit" value="Report Bite Case" class="btn btn-primary">
         </form>
             <form method="POST" action="addCase.php" id="reportCaseForm">

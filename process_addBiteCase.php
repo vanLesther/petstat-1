@@ -3,12 +3,14 @@ session_start();
 // var_dump($_POST);
 require_once("class/cases.php");
 require_once("class/geolocation.php");
+require_once("class/pet.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $residentID = $_POST['residentID'];
     $petName = $_POST['petName'];
-    $ownerName = $_POST['ownerName'];
-    $victimName = isset($_POST['victimName']) ? $_POST['victimName'] : ''; // Check if 'victimName' is set
+    $brgyID = $_POST['brgyID'];
+    // $ownerName = $_POST['ownerName'];
+    $victimsName = isset($_POST['victimsName']) ? $_POST['victimsName'] : ''; // Check if 'victimName' is set
     $caseType = $_POST['caseType'];
     $description = $_POST['description'];
     $latitude = $_POST['latitude'];
@@ -22,7 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Replace 'date' with the current date and time using the date function
         $currentDate = date('Y-m-d H:i:s');
-        $result = $case->addBiteCase($residentID, $petName, $ownerName, $victimName, $caseType, $description, $currentDate);
+        var_dump($currentDate); // Add this line to check the value
+        $result = $case->addBiteCase($residentID, $brgyID, $petName, $geoID, $victimsName, $caseType, $description, $currentDate);
         
         if ($result === true) {
             echo '<script>alert("Report Case Successfully"); window.location.href = "viewPet.php";</script>';

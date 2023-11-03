@@ -2,19 +2,18 @@
 require_once "db_connect.php";
 
 class Cases {
-    public function addBiteCase($residentID, $petName, $geoID, $ownerName, $caseType, $description, $caseDate) {
+    public function addBiteCase($residentID, $brgyID, $petName, $geoID, $victimsName, $caseType, $description, $currentDate) {
         global $conn;
         try {
             $petID = $this->getPetIDByName($petName);
-            $ownerID = $this->getOwnerIDByName($ownerName);
     
-            if (!$petID || !$ownerID) {
+            if (!$petID ==true) {
                 return "Pet or owner not found in the database.";
             }
     
-            $stmt = $conn->prepare("INSERT INTO `case` (residentID, petID, geoID, ownerID, caseType, description, date)
-                VALUES (?, ?, ?, ?, ?, ?, NOW())");
-            $stmt->bind_param("iiisss", $residentID, $petID, $geoID, $ownerID, $caseType, $description);
+            $stmt = $conn->prepare("INSERT INTO `case` (residentID, barangayID, petID, caseGeoID, victimsName, caseType, description, date)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("iiiissss", $residentID, $brgyID, $petID, $geoID, $victimsName, $caseType, $description, $currentDate);
             $stmt->execute();
     
             if ($stmt->affected_rows > 0) {

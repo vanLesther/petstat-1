@@ -16,7 +16,46 @@ $user = $_SESSION['user'];
 <html>
 <head>
     <title>Add Pet Form</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+
+function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                // Geolocation is not supported by the browser
+                // Handle the lack of support accordingly
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Assign the latitude and longitude values to hidden form fields
+            document.getElementById("latitude").value = latitude;
+            document.getElementById("longitude").value = longitude;
+
+            // Submit the form
+            document.getElementById("registrationForm").submit();
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    // User denied permission
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    // Location information is unavailable
+                    break;
+                case error.TIMEOUT:
+                    // The request to get user location timed out
+                    break;
+                case error.UNKNOWN_ERROR:
+                    // An unknown error occurred
+                    break;
+            }
+        }    
+    </script>
     <!-- Add jQuery library -->
 
     <!-- Add Bootstrap CSS -->
@@ -26,10 +65,10 @@ $user = $_SESSION['user'];
 <body>
     <div class="container">
         <h1>Report Case Form</h1>
-        <form method="POST" action="process_addCase.php" id="reportCaseForm">
+        <form method="POST" action="process_addBiteCase.php" id="reportCaseForm">
             <div class="mb-3">
-                <label for="petname" class="form-label">Name:</label>
-                <input type="text" class="form-control" name="name" id="petname" required>
+                <label for="petname" class="form-label">Victims Name:</label>
+                <input type="text" class="form-control" name="name" id="vicName" required>
             </div>
             <div class="mb-3">
                 <label for="petType" class="form-label">Pet Type:</label>
@@ -52,8 +91,10 @@ $user = $_SESSION['user'];
                 <input type="text" class="form-control" name="color" id="color" required>
             </div>
             <input type="hidden" name="residentID" id="residentID" value="<?php echo $user['residentID']; ?>">
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
 
-            <input type="submit" value="Add Pet" class="btn btn-primary">
+            <input onclick="getLocation() "type="submit" value="Add Pet" class="btn btn-primary">
         </form>
     </div>
 

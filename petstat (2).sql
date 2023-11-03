@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2023 at 10:46 AM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.11
+-- Generation Time: Nov 03, 2023 at 02:31 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -32,7 +31,7 @@ CREATE TABLE `admin` (
   `maoID` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -44,7 +43,7 @@ CREATE TABLE `barangay` (
   `brgyID` int(11) NOT NULL,
   `geoID` int(11) NOT NULL,
   `barangay` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `barangay`
@@ -130,12 +129,25 @@ CREATE TABLE `case` (
   `caseID` int(11) NOT NULL,
   `barangayID` int(11) NOT NULL,
   `residentID` int(11) NOT NULL,
+  `caseGeoID` int(11) NOT NULL,
   `petID` int(11) NOT NULL,
+  `victimsName` varchar(50) NOT NULL,
   `caseType` tinyint(1) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `caseStatus` tinyint(1) NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `caseStatus` tinyint(1) NOT NULL DEFAULT 0,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `case`
+--
+
+INSERT INTO `case` (`caseID`, `barangayID`, `residentID`, `caseGeoID`, `petID`, `victimsName`, `caseType`, `description`, `caseStatus`, `date`) VALUES
+(1, 43, 28, 100146, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:14:40'),
+(2, 43, 28, 100147, 11, 'hans', 0, 'test', 0, '2023-11-03 02:16:54'),
+(3, 43, 28, 100149, 1, 'sfa', 0, 'test', 0, '2023-11-03 02:23:35'),
+(4, 43, 28, 100150, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:26:36'),
+(5, 43, 28, 100151, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:26:36');
 
 -- --------------------------------------------------------
 
@@ -147,104 +159,125 @@ CREATE TABLE `geolocation` (
   `geoID` int(11) NOT NULL,
   `latitude` decimal(9,6) NOT NULL,
   `longitude` decimal(9,6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `geolocation`
 --
 
 INSERT INTO `geolocation` (`geoID`, `latitude`, `longitude`) VALUES
-(100000, '10.848964', '122.461899'),
-(100001, '10.883751', '122.473368'),
-(100002, '10.886936', '122.470015'),
-(100003, '10.884943', '122.517209'),
-(100004, '10.885794', '122.487165'),
-(100005, '10.893027', '122.499433'),
-(100006, '10.884555', '122.461535'),
-(100007, '10.922577', '122.535072'),
-(100009, '10.872372', '122.490318'),
-(100010, '10.937175', '122.477458'),
-(100011, '10.872403', '122.524800'),
-(100012, '10.882848', '122.533492'),
-(100013, '10.912917', '122.513968'),
-(100014, '10.852573', '122.479204'),
-(100015, '10.842126', '122.485694'),
-(100016, '10.853218', '122.490344'),
-(100017, '10.917746', '122.504353'),
-(100018, '10.936122', '122.489249'),
-(100020, '10.866239', '122.435766'),
-(100021, '10.852873', '122.453128'),
-(100022, '10.902666', '122.518559'),
-(100023, '10.906923', '122.475892'),
-(100026, '10.915980', '122.542807'),
-(100028, '10.922051', '122.521360'),
-(100029, '10.929424', '122.508033'),
-(100030, '10.907501', '122.527269'),
-(100031, '10.902759', '122.536477'),
-(100032, '10.864485', '122.454927'),
-(100033, '10.881789', '122.493425'),
-(100034, '10.882383', '122.510449'),
-(100035, '10.833569', '122.479969'),
-(100036, '10.889842', '122.507638'),
-(100037, '10.871116', '122.450295'),
-(100038, '10.915394', '122.530480'),
-(100039, '10.918942', '122.500394'),
-(100040, '10.860267', '122.483772'),
-(100041, '10.876586', '122.459645'),
-(100042, '10.879060', '122.465502'),
-(100054, '10.869324', '122.501311'),
-(100055, '10.883180', '122.525263'),
-(100056, '10.872054', '122.476270'),
-(100057, '10.906462', '122.500250'),
-(100058, '10.860234', '122.499710'),
-(100059, '10.896689', '122.488930'),
-(100060, '10.850311', '122.517943'),
-(100061, '10.921707', '122.488367'),
-(100062, '10.856930', '122.482571'),
-(100063, '10.854668', '122.507196'),
-(100064, '10.864334', '122.465748'),
-(100065, '10.853915', '122.472327'),
-(100090, '10.668400', '122.959200'),
-(100091, '10.668400', '122.959200'),
-(100092, '10.668400', '122.959200'),
-(100093, '10.668400', '122.959200'),
-(100094, '10.668400', '122.959200'),
-(100095, '10.668400', '122.959200'),
-(100096, '10.668400', '122.959200'),
-(100097, '10.668400', '122.959200'),
-(100098, '10.668400', '122.959200'),
-(100099, '10.668400', '122.959200'),
-(100100, '10.668400', '122.959200'),
-(100101, '10.668400', '122.959200'),
-(100102, '10.668400', '122.959200'),
-(100103, '10.668400', '122.959200'),
-(100104, '10.668400', '122.959200'),
-(100105, '10.668400', '122.959200'),
-(100106, '10.668400', '122.959200'),
-(100107, '10.668400', '122.959200'),
-(100108, '10.668400', '122.959200'),
-(100109, '10.668400', '122.959200'),
-(100110, '10.668400', '122.959200'),
-(100111, '10.668400', '122.959200'),
-(100112, '10.668400', '122.959200'),
-(100113, '10.668400', '122.959200'),
-(100114, '10.668400', '122.959200'),
-(100115, '10.668400', '122.959200'),
-(100116, '10.668400', '122.959200'),
-(100117, '10.668400', '122.959200'),
-(100118, '10.668400', '122.959200'),
-(100119, '10.668400', '122.959200'),
-(100120, '10.668400', '122.959200'),
-(100121, '10.668400', '122.959200'),
-(100122, '10.668400', '122.959200'),
-(100123, '10.668400', '122.959200'),
-(100124, '10.668400', '122.959200'),
-(100125, '10.668400', '122.959200'),
-(100126, '10.668400', '122.959200'),
-(100127, '10.668400', '122.959200'),
-(100128, '10.668400', '122.959200'),
-(100129, '10.668400', '122.959200'),
-(100130, '10.385300', '123.652500');
+(100000, 10.848964, 122.461899),
+(100001, 10.883751, 122.473368),
+(100002, 10.886936, 122.470015),
+(100003, 10.884943, 122.517209),
+(100004, 10.885794, 122.487165),
+(100005, 10.893027, 122.499433),
+(100006, 10.884555, 122.461535),
+(100007, 10.922577, 122.535072),
+(100009, 10.872372, 122.490318),
+(100010, 10.937175, 122.477458),
+(100011, 10.872403, 122.524800),
+(100012, 10.882848, 122.533492),
+(100013, 10.912917, 122.513968),
+(100014, 10.852573, 122.479204),
+(100015, 10.842126, 122.485694),
+(100016, 10.853218, 122.490344),
+(100017, 10.917746, 122.504353),
+(100018, 10.936122, 122.489249),
+(100020, 10.866239, 122.435766),
+(100021, 10.852873, 122.453128),
+(100022, 10.902666, 122.518559),
+(100023, 10.906923, 122.475892),
+(100026, 10.915980, 122.542807),
+(100028, 10.922051, 122.521360),
+(100029, 10.929424, 122.508033),
+(100030, 10.907501, 122.527269),
+(100031, 10.902759, 122.536477),
+(100032, 10.864485, 122.454927),
+(100033, 10.881789, 122.493425),
+(100034, 10.882383, 122.510449),
+(100035, 10.833569, 122.479969),
+(100036, 10.889842, 122.507638),
+(100037, 10.871116, 122.450295),
+(100038, 10.915394, 122.530480),
+(100039, 10.918942, 122.500394),
+(100040, 10.860267, 122.483772),
+(100041, 10.876586, 122.459645),
+(100042, 10.879060, 122.465502),
+(100054, 10.869324, 122.501311),
+(100055, 10.883180, 122.525263),
+(100056, 10.872054, 122.476270),
+(100057, 10.906462, 122.500250),
+(100058, 10.860234, 122.499710),
+(100059, 10.896689, 122.488930),
+(100060, 10.850311, 122.517943),
+(100061, 10.921707, 122.488367),
+(100062, 10.856930, 122.482571),
+(100063, 10.854668, 122.507196),
+(100064, 10.864334, 122.465748),
+(100065, 10.853915, 122.472327),
+(100090, 10.668400, 122.959200),
+(100091, 10.668400, 122.959200),
+(100092, 10.668400, 122.959200),
+(100093, 10.668400, 122.959200),
+(100094, 10.668400, 122.959200),
+(100095, 10.668400, 122.959200),
+(100096, 10.668400, 122.959200),
+(100097, 10.668400, 122.959200),
+(100098, 10.668400, 122.959200),
+(100099, 10.668400, 122.959200),
+(100100, 10.668400, 122.959200),
+(100101, 10.668400, 122.959200),
+(100102, 10.668400, 122.959200),
+(100103, 10.668400, 122.959200),
+(100104, 10.668400, 122.959200),
+(100105, 10.668400, 122.959200),
+(100106, 10.668400, 122.959200),
+(100107, 10.668400, 122.959200),
+(100108, 10.668400, 122.959200),
+(100109, 10.668400, 122.959200),
+(100110, 10.668400, 122.959200),
+(100111, 10.668400, 122.959200),
+(100112, 10.668400, 122.959200),
+(100113, 10.668400, 122.959200),
+(100114, 10.668400, 122.959200),
+(100115, 10.668400, 122.959200),
+(100116, 10.668400, 122.959200),
+(100117, 10.668400, 122.959200),
+(100118, 10.668400, 122.959200),
+(100119, 10.668400, 122.959200),
+(100120, 10.668400, 122.959200),
+(100121, 10.668400, 122.959200),
+(100122, 10.668400, 122.959200),
+(100123, 10.668400, 122.959200),
+(100124, 10.668400, 122.959200),
+(100125, 10.668400, 122.959200),
+(100126, 10.668400, 122.959200),
+(100127, 10.879060, 122.465502),
+(100128, 10.856930, 122.482571),
+(100129, 10.860234, 122.499710),
+(100130, 10.833569, 122.479969),
+(100131, 0.000000, 0.000000),
+(100132, 0.000000, 0.000000),
+(100133, 0.000000, 0.000000),
+(100134, 0.000000, 0.000000),
+(100135, 0.000000, 0.000000),
+(100136, 0.000000, 0.000000),
+(100137, 0.000000, 0.000000),
+(100138, 0.000000, 0.000000),
+(100139, 0.000000, 0.000000),
+(100140, 0.000000, 0.000000),
+(100141, 0.000000, 0.000000),
+(100142, 0.000000, 0.000000),
+(100143, 0.000000, 0.000000),
+(100144, 0.000000, 0.000000),
+(100145, 0.000000, 0.000000),
+(100146, 0.000000, 0.000000),
+(100147, 0.000000, 0.000000),
+(100148, 10.309900, 123.893000),
+(100149, 0.000000, 0.000000),
+(100150, 0.000000, 0.000000),
+(100151, 10.309900, 123.893000);
 
 -- --------------------------------------------------------
 
@@ -258,7 +291,7 @@ CREATE TABLE `notification` (
   `brgyID` int(11) NOT NULL,
   `caseID` int(11) NOT NULL,
   `description` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -273,21 +306,29 @@ CREATE TABLE `pet` (
   `pname` varchar(50) NOT NULL,
   `sex` tinyint(1) NOT NULL,
   `color` varchar(50) NOT NULL,
-  `vaccinationStatus` tinyint(1) NOT NULL,
+  `vacID` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `pet`
 --
 
-INSERT INTO `pet` (`petID`, `residentID`, `petType`, `pname`, `sex`, `color`, `vaccinationStatus`, `status`) VALUES
+INSERT INTO `pet` (`petID`, `residentID`, `petType`, `pname`, `sex`, `color`, `vacID`, `status`) VALUES
 (1, 28, 0, 'petstat', 0, 'black', 0, 1),
-(2, 28, 1, 'petstat', 0, 'black', 0, 0),
+(2, 28, 1, 'petstat', 0, 'black', 0, 1),
 (3, 31, 1, 'vanilla', 1, 'black and white', 0, 2),
-(4, 31, 1, 'vanilla', 1, 'black and white', 0, 0),
+(4, 31, 1, 'vanilla', 1, 'black and white', 0, 1),
 (5, 31, 1, 'vanilla', 1, 'black and white', 0, 0),
-(6, 31, 1, 'mocha', 1, 'brown with stri', 0, 0);
+(6, 31, 1, 'mocha', 1, 'brown with stri', 0, 0),
+(7, 27, 0, 'van lesther Farol', 0, 'black and white', 0, 0),
+(8, 27, 0, 'van lesther Farol', 0, 'black and white', 0, 0),
+(9, 27, 0, 'petstat', 1, '12', 0, 0),
+(10, 27, 0, 'petstata', 0, 'black and white', 0, 0),
+(11, 27, 1, 'ERTER', 0, 'black and white', 0, 0),
+(12, 27, 1, 'petstat', 0, 'black and white', 0, 0),
+(13, 27, 0, 'petstat', 0, 'black and white', 0, 0),
+(14, 27, 0, 'petstat', 0, 'black and white', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -303,20 +344,32 @@ CREATE TABLE `resident` (
   `contactNo` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `userType` tinyint(1) NOT NULL DEFAULT '0',
-  `userStatus` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `userType` tinyint(1) NOT NULL DEFAULT 0,
+  `userStatus` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `resident`
 --
 
 INSERT INTO `resident` (`residentID`, `geoID`, `brgyID`, `name`, `contactNo`, `email`, `password`, `userType`, `userStatus`) VALUES
-(27, 100126, 43, 'van lesther Farol', '09933715629', 'v4n0613@gmail.com', '123', 0, 1),
+(27, 100126, 44, 'van lesther Farol', '09933715629', 'v4n0613@gmail.com', '123', 0, 1),
 (28, 100127, 43, 'petstat', '09933715629', 'qwerty@qwerty.qwerty', '111', 1, 0),
 (29, 100128, 63, 'hans francis', '09754561234', 'hans@gmail.com', '123', 0, 0),
 (30, 100129, 59, 'louvenn', '09736732234', 'loben@gmail.com', '123', 0, 0),
-(31, 100130, 36, 'van lesther', '09933715629', 'v4n06a13@gmail.com', 'asd', 0, 0);
+(31, 100130, 36, 'van lesther', '09933715629', 'v4n06a13@gmail.com', 'asd', 0, 0),
+(32, 100148, 5, 'van', '09933715629', 'vanlesther.farol@students.isatu.edu.ph', 'aaa', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vaccination`
+--
+
+CREATE TABLE `vaccination` (
+  `vacID` int(11) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -341,7 +394,8 @@ ALTER TABLE `case`
   ADD PRIMARY KEY (`caseID`),
   ADD KEY `barangayID` (`barangayID`),
   ADD KEY `petID` (`petID`),
-  ADD KEY `residentID` (`residentID`);
+  ADD KEY `residentID` (`residentID`),
+  ADD KEY `caseGeoID` (`caseGeoID`);
 
 --
 -- Indexes for table `geolocation`
@@ -362,13 +416,21 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `pet`
   ADD PRIMARY KEY (`petID`),
-  ADD KEY `residentID` (`residentID`);
+  ADD KEY `residentID` (`residentID`),
+  ADD KEY `vacID` (`vacID`);
 
 --
 -- Indexes for table `resident`
 --
 ALTER TABLE `resident`
-  ADD PRIMARY KEY (`residentID`);
+  ADD PRIMARY KEY (`residentID`),
+  ADD KEY `geoID` (`geoID`);
+
+--
+-- Indexes for table `vaccination`
+--
+ALTER TABLE `vaccination`
+  ADD PRIMARY KEY (`vacID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -390,25 +452,31 @@ ALTER TABLE `barangay`
 -- AUTO_INCREMENT for table `case`
 --
 ALTER TABLE `case`
-  MODIFY `caseID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `caseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `geolocation`
 --
 ALTER TABLE `geolocation`
-  MODIFY `geoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100131;
+  MODIFY `geoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100152;
 
 --
 -- AUTO_INCREMENT for table `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `petID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `petID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `resident`
 --
 ALTER TABLE `resident`
-  MODIFY `residentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `residentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `vaccination`
+--
+ALTER TABLE `vaccination`
+  MODIFY `vacID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -420,7 +488,8 @@ ALTER TABLE `resident`
 ALTER TABLE `case`
   ADD CONSTRAINT `case_ibfk_1` FOREIGN KEY (`barangayID`) REFERENCES `barangay` (`brgyID`),
   ADD CONSTRAINT `case_ibfk_2` FOREIGN KEY (`petID`) REFERENCES `pet` (`petID`),
-  ADD CONSTRAINT `case_ibfk_3` FOREIGN KEY (`residentID`) REFERENCES `resident` (`residentID`);
+  ADD CONSTRAINT `case_ibfk_3` FOREIGN KEY (`residentID`) REFERENCES `resident` (`residentID`),
+  ADD CONSTRAINT `case_ibfk_5` FOREIGN KEY (`caseGeoID`) REFERENCES `geolocation` (`geoID`);
 
 --
 -- Constraints for table `notification`
@@ -435,6 +504,18 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `pet`
   ADD CONSTRAINT `pet_ibfk_1` FOREIGN KEY (`residentID`) REFERENCES `resident` (`residentID`);
+
+--
+-- Constraints for table `resident`
+--
+ALTER TABLE `resident`
+  ADD CONSTRAINT `resident_ibfk_1` FOREIGN KEY (`geoID`) REFERENCES `geolocation` (`geoID`);
+
+--
+-- Constraints for table `vaccination`
+--
+ALTER TABLE `vaccination`
+  ADD CONSTRAINT `vaccination_ibfk_1` FOREIGN KEY (`vacID`) REFERENCES `pet` (`vacID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
