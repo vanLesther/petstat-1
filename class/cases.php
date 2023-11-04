@@ -62,5 +62,67 @@ class Cases {
     
         return false;
     }
+
+    public function getAllNewBiteCase() {
+        global $conn;
+        
+        $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 0 AND caseType = 0";
+        $result = $conn->query($query);
+    
+        if (!$result) {
+            return false; // Return false if the query fails
+        }
+    
+        return $result;
+    }
+    
+public function getAllValidBiteCase() {
+    global $conn;
+    
+    $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 1 AND caseType = 0";
+    $result = $conn->query($query);
+    
+    if (!$result) {
+        return false; // Return false if the query fails
+    }
+
+    return $result;
+}
+
+public function getAllRejectedBiteCase() {
+    global $conn;
+    
+    $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 2 AND caseType = 0";
+    $result = $conn->query($query);
+    
+    if (!$result) {
+        return false; // Return false if the query fails
+    }
+
+    return $result;
+}
+
+public function updateBiteCaseStatus($caseID, $caseStatus){
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE `case` SET caseStatus = ? WHERE caseID = ?");
+    $stmt->bind_param("ii", $caseStatus, $caseID);
+
+    try {
+        if ($stmt->execute()) {
+            // Update successful
+            return true;
+        } else {
+            // Failed to update user status
+            return "Failed to update user status: " . $stmt->error;
+        }
+    } catch (Exception $e) {
+        // Handle the exception
+        return "Failed to update user status: " . $e->getMessage();
+    } finally {
+        $stmt->close();
+    }
+}
+
 }
 ?>

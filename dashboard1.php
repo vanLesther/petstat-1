@@ -143,6 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
             <a href="dashboard1pet.php" class="btn btn-primary">Manage Pet</a>
             <a href="reportCase.php" class="btn btn-primary">Report Case</a>
+            <a href="dashboardBiteCases.php" class="btn btn-primary">Manage Bite Cases</a>
             <a href="logout.php" class="btn btn-primary">Logout</a>
         </div>
     </div>
