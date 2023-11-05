@@ -4,19 +4,14 @@ session_start();
 require_once("class/resident.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = $_POST["email"];
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL); // Sanitize input
     $password = $_POST["password"];
 
     $resident = new Resident();
     $user = $resident->loginResident($email, $password);
 
     if ($user !== false) {
-        // Successful login, store user information in session
         $_SESSION['user'] = $user; // Store the user array directly
-        // var_dump($user);
-        // header("Location: dashboard1.php");
-        // exit();
-
         switch ($user['userType']) {
             case 0:
                 header("Location: dashboard.php");
@@ -32,10 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 exit();
         }
     } else {
-        // Invalid credentials, redirect back to login page
-        // header("Location: login.php?error=invalid");
-        // var_dump($user);
-        echo '<script>alert("Incorrect email or password!"); window.location.href = "login.php?error=invalid";</script>';
+        // Redirect with an error message
+        header("Location: login.php?error=invalid");
         exit();
     }
 }

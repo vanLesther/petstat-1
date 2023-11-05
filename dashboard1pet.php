@@ -1,12 +1,18 @@
 <?php
 session_start();
 require_once("class/pet.php");
+require_once("class/barangay.php");
 
 // Check if the user is logged in and has admin privileges (userType = 1)
 if (!isset($_SESSION['user']) || $_SESSION['user']['userType'] != 1) {
     header("Location: login.php");
     exit();
 }
+
+$brgyID = isset($_SESSION['user']['brgyID']) ? $_SESSION['user']['brgyID'] : '';
+
+$barangay = new Barangay();
+$result = $barangay->getBrgyName($brgyID);
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -36,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <div class="container">
-        <h1>Manage Pets for Barangay: <?php echo isset($_SESSION['user']['barangay']) ? $_SESSION['user']['barangay'] : ''; ?></h1>
+        <h1>Manage Pets for Barangay: <?php echo($result)?></h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link active" href="#newPets" data-bs-toggle="tab">New Pets</a>
@@ -66,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <tbody>
                     <?php
                     $pet = new Pet();
-                    $pets = $pet->getAllNewPets();
+                    $pets = $pet->getAllNewPets($brgyID);
 
                     while ($row = $pets->fetch_assoc()) {
                         echo '<tr>';
@@ -104,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                             $pet = new Pet();
-                            $pets = $pet->getAllValidPets();
+                            $pets = $pet->getAllValidPets($brgyID);
 
                             while ($row = $pets->fetch_assoc()) {
                             echo '<tr>';
@@ -134,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                             $pet = new Pet();
-                            $pets = $pet->getAllRejectedPets();
+                            $pets = $pet->getAllRejectedPets($brgyID);
 
                             while ($row = $pets->fetch_assoc()) {
                             echo '<tr>';

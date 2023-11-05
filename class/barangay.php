@@ -20,6 +20,25 @@ class Barangay {
             return false;
         }
     }
+    public function getBrgyName($brgyID) {
+        global $conn;
+    
+        try {
+            $stmt = $conn->prepare("SELECT barangay FROM barangay WHERE brgyID = ?");
+            $stmt->bind_param("i", $brgyID);  // Use "i" for integer
+            $stmt->execute();
+            $stmt->bind_result($barangayName);
+            $stmt->fetch();
+    
+            $stmt->close();
+    
+            return $barangayName;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
 }
 
 ?>

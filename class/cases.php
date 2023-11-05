@@ -63,11 +63,14 @@ class Cases {
         return false;
     }
 
-    public function getAllNewBiteCase() {
+    public function getAllNewBiteCase($brgyID) {
         global $conn;
-        
-        $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 0 AND caseType = 0";
-        $result = $conn->query($query);
+    
+        $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 0 AND caseType = 0 AND barangayID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $brgyID);
+        $stmt->execute();
+        $result = $stmt->get_result();
     
         if (!$result) {
             return false; // Return false if the query fails
@@ -76,31 +79,39 @@ class Cases {
         return $result;
     }
     
-public function getAllValidBiteCase() {
-    global $conn;
+    public function getAllValidBiteCase($brgyID) {
+        global $conn;
     
-    $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 1 AND caseType = 0";
-    $result = $conn->query($query);
+        $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 1 AND caseType = 0 AND barangayID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $brgyID);
+        $stmt->execute();
+        $result = $stmt->get_result();
     
-    if (!$result) {
-        return false; // Return false if the query fails
+        if (!$result) {
+            return false; // Return false if the query fails
+        }
+    
+        return $result;
     }
-
-    return $result;
-}
-
-public function getAllRejectedBiteCase() {
-    global $conn;
     
-    $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 2 AND caseType = 0";
-    $result = $conn->query($query);
+    public function getAllRejectedBiteCase($brgyID) {
+        global $conn;
     
-    if (!$result) {
-        return false; // Return false if the query fails
+        $query = "SELECT * FROM `case` NATURAL JOIN pet WHERE caseStatus = 2 AND caseType = 0 AND barangayID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $brgyID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if (!$result) {
+            return false; // Return false if the query fails
+        }
+    
+        return $result;
     }
-
-    return $result;
-}
+    
+    
 
 public function updateBiteCaseStatus($caseID, $caseStatus){
     global $conn;

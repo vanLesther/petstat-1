@@ -1,12 +1,18 @@
 <?php
 session_start();
 require_once("class/cases.php");
+require_once("class/barangay.php");
 
 // Check if the user is logged in and has admin privileges (userType = 1)
 if (!isset($_SESSION['user']) || $_SESSION['user']['userType'] != 1) {
     header("Location: login.php");
     exit();
 }
+
+$brgyID = isset($_SESSION['user']['brgyID']) ? $_SESSION['user']['brgyID'] : '';
+
+$barangay = new Barangay();
+$result = $barangay->getBrgyName($brgyID);
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -36,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <div class="container">
-        <h1>Manage Bite Case for Barangay: <?php echo isset($_SESSION['user']['barangay']) ? $_SESSION['user']['barangay'] : ''; ?></h1>
+        <h1>Manage Bite Case for Barangay: <?php echo($result)?></h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link active" href="#newBiteCase" data-bs-toggle="tab">New Bite Case</a>
@@ -64,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                         $case = new Cases();
-                        $cases = $case->getAllNewBiteCase();
+                        $cases = $case->getAllNewBiteCase($brgyID);
 
                         while ($row = $cases->fetch_assoc()) {
                             echo '<tr>';
@@ -107,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                         $case = new Cases();
-                        $cases = $case->getAllValidBiteCase();
+                        $cases = $case->getAllValidBiteCase($brgyID);
 
                         while ($row = $cases->fetch_assoc()) {
                             echo '<tr>';
@@ -143,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                         $case = new Cases();
-                        $cases = $case->getAllRejectedBiteCase();
+                        $cases = $case->getAllRejectedBiteCase($brgyID);
 
                         while ($row = $cases->fetch_assoc()) {
                             echo '<tr>';

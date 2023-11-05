@@ -49,11 +49,15 @@ class Pet {
         }
     }
     
-    public function getAllNewPets(){
+    public function getAllNewPets($brgyID){
         global $conn;
 
-        $query = "SELECT * FROM resident NATURAL JOIN pet WHERE status = 0";
-        $result = $conn->query($query);
+        $query = "SELECT * FROM resident NATURAL JOIN pet WHERE status = 0 AND brgyID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $brgyID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
         if (!$result) {
             return false; // Return false if the query fails
         }
@@ -61,11 +65,15 @@ class Pet {
         return $result;
     }
 
-    public function getAllValidPets(){
+    public function getAllValidPets($brgyID){
         global $conn;
 
-        $query = "SELECT * FROM resident NATURAL JOIN pet WHERE status = 1";
-        $result = $conn->query($query);
+        $query = "SELECT * FROM resident NATURAL JOIN pet WHERE status = 1 AND brgyID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $brgyID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
         if (!$result) {
             return false; // Return false if the query fails
         }
@@ -73,11 +81,15 @@ class Pet {
         return $result;
     }
 
-    public function getAllRejectedPets(){
+    public function getAllRejectedPets($brgyID){
         global $conn;
 
-        $query = "SELECT * FROM resident NATURAL JOIN pet WHERE status = 2";
-        $result = $conn->query($query);
+        $query = "SELECT * FROM resident NATURAL JOIN pet WHERE status = 2 AND brgyID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $brgyID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
         if (!$result) {
             return false; // Return false if the query fails
         }

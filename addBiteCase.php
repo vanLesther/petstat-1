@@ -1,11 +1,15 @@
 <?php
 session_start();
 require_once("class/db_connect.php");
+require_once("class/barangay.php");
+
 // Check if the user is logged in
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
+
+$brgyID = isset($_SESSION['user']['brgyID']) ? $_SESSION['user']['brgyID'] : '';
 
 // Get the user's information from the session
 $user = $_SESSION['user'];
@@ -27,7 +31,7 @@ $user = $_SESSION['user'];
         <h1>Report Bite Case Form</h1>
         <form method="POST" action="process_addBiteCase.php" id="reportCaseForm">
             <div class="mb-3">
-                <label for="petName" class="form-label">Pet Name:</label>
+                <label for= "petName" class="form-label">Pet Name:</label>
                 <select class="form-select" name="petName" id="petName" required>
                     <option value="">Select Pet</option>
                     <?php
@@ -38,8 +42,11 @@ $user = $_SESSION['user'];
                         die("Connection failed: " . $conn->connect_error);
                     }
 
-                    $sql = "SELECT pname FROM pet";
-                    $result = $conn->query($sql);
+                    $sql = "SELECT pname FROM `pet` NATURAL JOIN resident WHERE brgyID =? ";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $brgyID);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -51,39 +58,6 @@ $user = $_SESSION['user'];
                     ?>
                 </select>
             </div>
-            <!-- <div class="mb-3">
-                <label for="ownerName" class="form-label">Owner Name:</label>
-                <select class="form-select" name="ownerName" id="ownerName" required>
-                    <option value="">Select Owner</option>
-                    <?php
-                    // PHP code to fetch and display owner names from the database
-                    // global $conn;
-
-                    // if ($conn->connect_error) {
-                    //     die("Connection failed: " . $conn->connect_error);
-                    // }
-
-                    // $sql1 = "SELECT name FROM resident";
-                    // $result1 = $conn->query($sql1);
-
-                    // if ($result1->num_rows > 0) {
-                    //     while ($row = $result1->fetch_assoc()) {
-                    //         echo '<option value="' . $row["name"] . '">' . $row["name"] . '</option>';
-                    //     }
-                    // } else {
-                    //     echo '<option value="">No owners found</option>';
-                    // }
-                    // ?>
-                </select>
-            </div> -->
-            <!-- <div class="mb-3">
-                <label for="caseType" class="form-label">Case Type:</label>
-                <select class="form-select" name="caseType" id="caseType" required>
-                    <option value="">Select Case Type</option>
-                    <option value="0">Bite</option>
-                    <option value="1">Death</option>
-                </select>
-            </div> -->
             <div class="mb-3">
                 <label for="Victim" class="form-label">Victim Name:</label>
                 <input type="text" class="form-control" name="victimsName" id="victimsName" required>
@@ -98,7 +72,7 @@ $user = $_SESSION['user'];
             <input type="hidden" name="latitude" id="latitude">
             <input type="hidden" name="longitude" id="longitude">
            <!-- Update the "Add Pet" button to call getLocation() with the form ID -->
-            <input type="submit" value="Add Pet" class="btn btn-primary" onclick="getLocation('reportCaseForm')">
+            <input type="submit" value="Add Bite Case" class="btn btn-primary" onclick="getLocation('reportCaseForm')">
         </form>
     </div>
 <!-- Update the getLocation() function to accept a form ID parameter -->

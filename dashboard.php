@@ -128,6 +128,10 @@ $pets = $pet->getPetsByResidentID($user['residentID']);
             </div>
         </div>
     </div>
+    <div class="container">
+        <h2>Add Bite Case</h2>
+        <a href="addBiteCase.php" class="btn btn-primary">Add Bite Cases</a>
+    </div>
 
     <script>
         $(document).ready(function() {

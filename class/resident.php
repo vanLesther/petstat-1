@@ -82,11 +82,14 @@ function updateUserStatus($residentID, $status) {
         $stmt->close();
     }
 }
-public function getAllNewResidents() {
+public function getAllNewResidents($brgyID) {
     global $conn;
-    
-    $query = "SELECT * FROM resident WHERE userStatus = 0";
-    $result = $conn->query($query);
+
+    $query = "SELECT * FROM resident WHERE userStatus = 0 AND brgyID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $brgyID);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if (!$result) {
         return false; // Return false if the query fails
@@ -94,11 +97,15 @@ public function getAllNewResidents() {
 
     return $result;
 }
-public function getAllValidResidents() {
+
+public function getAllValidResidents($brgyID) {
     global $conn;
-    
-    $query = "SELECT * FROM resident WHERE userStatus = 1";
-    $result = $conn->query($query);
+
+    $query = "SELECT * FROM resident WHERE userStatus = 1 AND brgyID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $brgyID);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if (!$result) {
         return false; // Return false if the query fails
@@ -106,11 +113,14 @@ public function getAllValidResidents() {
 
     return $result;
 }
-public function getAllRejectedResidents() {
+public function getAllRejectedResidents($brgyID) {
     global $conn;
-    
-    $query = "SELECT * FROM resident WHERE userStatus = 2";
-    $result = $conn->query($query);
+
+    $query = "SELECT * FROM resident WHERE userStatus = 2 AND brgyID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $brgyID);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if (!$result) {
         return false; // Return false if the query fails

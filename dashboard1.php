@@ -1,12 +1,18 @@
 <?php
 session_start();
 require_once("class/resident.php");
+require_once("class/barangay.php");
 
 // Check if the user is logged in and has admin privileges (userType = 1)
 if (!isset($_SESSION['user']) || $_SESSION['user']['userType'] != 1) {
     header("Location: login.php");
     exit();
 }
+
+$brgyID = isset($_SESSION['user']['brgyID']) ? $_SESSION['user']['brgyID'] : '';
+
+$barangay = new Barangay();
+$result = $barangay->getBrgyName($brgyID);
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -36,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <div class="container">
-    <h1>Manage Resident for Barangay: <?php echo isset($_SESSION['user']['barangay']) ? $_SESSION['user']['barangay'] : ''; ?></h1>
+    <h1>Manage Pets for Barangay: <?php echo($result)?></h1>
         <!-- Navigation Tabs -->
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -66,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                         $resident = new Resident();
-                        $users = $resident->getAllNewResidents();
+                        $users = $resident->getAllNewResidents($brgyID);
 
                         while ($row = $users->fetch_assoc()) {
                             echo '<tr>';
@@ -104,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                         $resident = new Resident();
-                        $users = $resident->getAllValidResidents();
+                        $users = $resident->getAllValidResidents($brgyID);
 
                         while ($row = $users->fetch_assoc()) {
                             echo '<tr>';
@@ -129,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <tbody>
                         <?php
                         $resident = new Resident();
-                        $users = $resident->getAllRejectedResidents();
+                        $users = $resident->getAllRejectedResidents($brgyID);
 
                         while ($row = $users->fetch_assoc()) {
                             echo '<tr>';
