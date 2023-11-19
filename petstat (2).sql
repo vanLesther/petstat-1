@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 02:31 AM
+-- Generation Time: Nov 19, 2023 at 12:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -143,11 +143,27 @@ CREATE TABLE `case` (
 --
 
 INSERT INTO `case` (`caseID`, `barangayID`, `residentID`, `caseGeoID`, `petID`, `victimsName`, `caseType`, `description`, `caseStatus`, `date`) VALUES
-(1, 43, 28, 100146, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:14:40'),
+(1, 43, 28, 100146, 1, 'sfa', 0, 'hahaha', 1, '2023-11-03 02:14:40'),
 (2, 43, 28, 100147, 11, 'hans', 0, 'test', 0, '2023-11-03 02:16:54'),
-(3, 43, 28, 100149, 1, 'sfa', 0, 'test', 0, '2023-11-03 02:23:35'),
+(3, 43, 28, 100149, 1, 'sfa', 0, 'test', 1, '2023-11-03 02:23:35'),
 (4, 43, 28, 100150, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:26:36'),
-(5, 43, 28, 100151, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:26:36');
+(5, 43, 28, 100151, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:26:36'),
+(6, 43, 28, 100152, 1, 'sfa', 0, 'hahaha', 1, '2023-11-03 02:35:18'),
+(7, 43, 28, 100153, 1, 'sfa', 0, 'hahaha', 0, '2023-11-03 02:35:19'),
+(8, 43, 28, 100154, 7, 'van', 0, 'test2', 0, '2023-11-03 02:41:49'),
+(9, 43, 38, 100169, 1, 'Van Lesther', 0, 'Test', 0, '2023-11-04 15:48:22'),
+(10, 43, 38, 100170, 1, 'Van Lesther', 0, 'Test', 0, '2023-11-04 15:48:22'),
+(11, 43, 40, 100173, 16, 'test victim', 0, 'test test', 1, '2023-11-05 10:16:59'),
+(12, 43, 40, 100174, 16, 'test victim', 0, 'test test', 2, '2023-11-05 10:16:59'),
+(13, 43, 40, 100175, 11, 'hans', 0, 'Test', 0, '2023-11-05 10:18:13'),
+(14, 43, 40, 100176, 11, 'hans', 0, 'Test', 0, '2023-11-05 10:18:13'),
+(15, 43, 40, 100177, 1, 'van', 0, 'fghfgjh', 0, '2023-11-05 10:26:20'),
+(16, 43, 40, 100178, 1, 'van', 0, 'fghfgjh', 0, '2023-11-05 10:26:20'),
+(17, 43, 40, 100179, 15, 'sfa', 0, 'fghfgjh', 0, '2023-11-05 10:34:56'),
+(18, 43, 40, 100180, 15, 'sfa', 0, 'fghfgjh', 0, '2023-11-05 10:34:56'),
+(19, 43, 40, 100181, 23, 'Van Lesther', 0, 'Test', 0, '2023-11-19 08:09:32'),
+(21, 43, 40, 100185, 1, '', 1, '', 1, '2023-11-19 08:52:48'),
+(22, 43, 40, 100186, 1, '', 1, '', 0, '2023-11-19 08:59:11');
 
 -- --------------------------------------------------------
 
@@ -277,7 +293,42 @@ INSERT INTO `geolocation` (`geoID`, `latitude`, `longitude`) VALUES
 (100148, 10.309900, 123.893000),
 (100149, 0.000000, 0.000000),
 (100150, 0.000000, 0.000000),
-(100151, 10.309900, 123.893000);
+(100151, 10.309900, 123.893000),
+(100152, 0.000000, 0.000000),
+(100153, 10.309900, 123.893000),
+(100154, 0.000000, 0.000000),
+(100155, 10.309900, 123.893000),
+(100156, 10.309900, 123.893000),
+(100157, 10.309900, 123.893000),
+(100158, 10.309900, 123.893000),
+(100159, 10.309900, 123.893000),
+(100160, 10.309900, 123.893000),
+(100161, 10.309900, 123.893000),
+(100162, 10.309900, 123.893000),
+(100163, 10.309900, 123.893000),
+(100164, 10.309900, 123.893000),
+(100165, 10.309900, 123.893000),
+(100166, 10.309900, 123.893000),
+(100167, 10.879060, 122.465502),
+(100168, 10.879060, 122.465502),
+(100169, 0.000000, 0.000000),
+(100170, 10.309900, 123.893000),
+(100171, 10.879060, 122.465502),
+(100172, 10.879060, 122.465502),
+(100173, 0.000000, 0.000000),
+(100174, 10.309900, 123.893000),
+(100175, 0.000000, 0.000000),
+(100176, 10.309900, 123.893000),
+(100177, 0.000000, 0.000000),
+(100178, 10.309900, 123.893000),
+(100179, 0.000000, 0.000000),
+(100180, 10.309900, 123.893000),
+(100181, 10.309900, 123.893000),
+(100182, 0.000000, 0.000000),
+(100183, 0.000000, 0.000000),
+(100184, 0.000000, 0.000000),
+(100185, 0.000000, 0.000000),
+(100186, 0.000000, 0.000000);
 
 -- --------------------------------------------------------
 
@@ -307,28 +358,45 @@ CREATE TABLE `pet` (
   `sex` tinyint(1) NOT NULL,
   `color` varchar(50) NOT NULL,
   `vacID` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL,
+  `petDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `pet`
 --
 
-INSERT INTO `pet` (`petID`, `residentID`, `petType`, `pname`, `sex`, `color`, `vacID`, `status`) VALUES
-(1, 28, 0, 'petstat', 0, 'black', 0, 1),
-(2, 28, 1, 'petstat', 0, 'black', 0, 1),
-(3, 31, 1, 'vanilla', 1, 'black and white', 0, 2),
-(4, 31, 1, 'vanilla', 1, 'black and white', 0, 1),
-(5, 31, 1, 'vanilla', 1, 'black and white', 0, 0),
-(6, 31, 1, 'mocha', 1, 'brown with stri', 0, 0),
-(7, 27, 0, 'van lesther Farol', 0, 'black and white', 0, 0),
-(8, 27, 0, 'van lesther Farol', 0, 'black and white', 0, 0),
-(9, 27, 0, 'petstat', 1, '12', 0, 0),
-(10, 27, 0, 'petstata', 0, 'black and white', 0, 0),
-(11, 27, 1, 'ERTER', 0, 'black and white', 0, 0),
-(12, 27, 1, 'petstat', 0, 'black and white', 0, 0),
-(13, 27, 0, 'petstat', 0, 'black and white', 0, 0),
-(14, 27, 0, 'petstat', 0, 'black and white', 0, 0);
+INSERT INTO `pet` (`petID`, `residentID`, `petType`, `pname`, `sex`, `color`, `vacID`, `status`, `petDate`) VALUES
+(1, 28, 0, 'petstat', 0, 'black', 0, 1, '2023-11-19 09:05:47'),
+(2, 28, 1, 'petstat', 0, 'black', 0, 1, '2023-11-19 09:05:47'),
+(3, 31, 1, 'vanilla', 1, 'black and white', 0, 2, '2023-11-19 09:05:47'),
+(4, 31, 1, 'vanilla', 1, 'black and white', 0, 1, '2023-11-19 09:05:47'),
+(5, 31, 1, 'vanilla', 1, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(6, 31, 1, 'mocha', 1, 'brown with stri', 0, 0, '2023-11-19 09:05:47'),
+(7, 27, 0, 'van lesther Farol', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(8, 27, 0, 'van lesther Farol', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(9, 27, 0, 'petstat', 1, '12', 0, 0, '2023-11-19 09:05:47'),
+(10, 27, 0, 'petstata', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(11, 27, 1, 'ERTER', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(12, 27, 1, 'petstat', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(13, 27, 0, 'petstat', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(14, 27, 0, 'petstat', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(15, 38, 0, 'test pet', 0, 'black and white', 0, 0, '2023-11-19 09:05:47'),
+(16, 40, 0, 'pam G', 0, 'brown with stripes', 0, 0, '2023-11-19 09:05:47'),
+(17, 40, 1, 'lester', 0, 'white', 0, 0, '2023-11-19 09:05:47'),
+(18, 40, 1, 'lester', 0, 'white', 0, 0, '2023-11-19 09:05:47'),
+(19, 40, 0, 'hjans', 0, 'white', 0, 0, '2023-11-19 09:05:47'),
+(20, 40, 0, 'hjans', 0, 'white', 0, 0, '2023-11-19 09:05:47'),
+(21, 40, 1, 'van', 0, 'black', 0, 0, '2023-11-19 09:05:47'),
+(22, 40, 0, 'vas', 0, 'white', 0, 0, '2023-11-19 09:05:47'),
+(23, 40, 1, 'tala', 1, 'brown with stripes', 0, 0, '2023-11-19 09:05:47'),
+(24, 40, 0, 'petstat', 1, 'brown with stripes', 0, 0, '0000-00-00 00:00:00'),
+(25, 40, 0, 'petstat', 1, 'brown with stripes', 0, 0, '0000-00-00 00:00:00'),
+(26, 40, 1, 'petstat', 0, 'brown with stripes', 0, 0, '0000-00-00 00:00:00'),
+(27, 40, 1, 'petstat', 0, 'brown with stripes', 0, 0, '2023-11-19 02:19:03'),
+(28, 40, 0, 'petstat', 1, 'white', 0, 1, '2023-11-19 02:19:18'),
+(29, 40, 0, 'petstat', 1, 'white', 0, 1, '2023-11-19 02:19:47'),
+(30, 40, 0, 'van lesther Farol', 0, 'brown', 0, 0, '2023-11-19 11:32:35');
 
 -- --------------------------------------------------------
 
@@ -343,7 +411,7 @@ CREATE TABLE `resident` (
   `name` varchar(50) NOT NULL,
   `contactNo` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `userType` tinyint(1) NOT NULL DEFAULT 0,
   `userStatus` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -358,7 +426,15 @@ INSERT INTO `resident` (`residentID`, `geoID`, `brgyID`, `name`, `contactNo`, `e
 (29, 100128, 63, 'hans francis', '09754561234', 'hans@gmail.com', '123', 0, 0),
 (30, 100129, 59, 'louvenn', '09736732234', 'loben@gmail.com', '123', 0, 0),
 (31, 100130, 36, 'van lesther', '09933715629', 'v4n06a13@gmail.com', 'asd', 0, 0),
-(32, 100148, 5, 'van', '09933715629', 'vanlesther.farol@students.isatu.edu.ph', 'aaa', 0, 0);
+(32, 100148, 5, 'van', '09933715629', 'vanlesther.farol@students.isatu.edu.ph', 'aaa', 0, 0),
+(33, 100157, 43, 'van', '09933715629', 'qwerty@qwerty.qwerty1', '$2y$10$qTY4LDZiwBieOte3T1eWJOx', 0, 0),
+(34, 100158, 43, 'petstat', '09933715629', 'vanleatherfarol@gmail.com1', '$2y$10$DqbDIq/HGmiZ.nqCDkBQAOr', 0, 0),
+(35, 100163, 42, 'sdas', '09933715629', 'vanlesther44@gmail.com1', '$2y$10$lTMsUIK5No9lc9ZbMDWG0.9', 0, 0),
+(36, 100165, 43, 'hjans', '09933715629', 'qwerty@qwerty.qwerty11', '$2y$10$T2bzhrtFCXjri0jOiINkqOE', 0, 0),
+(37, 100167, 43, 'hjans', '09933715629', 'qwerty@qwerty.qwerty000', '$2y$10$Cx6glXeSgF1oskOU1FFAF.u/SfdH5OZjtWHf38xnC/4Y34SazOnT6', 0, 0),
+(38, 100168, 43, 'Van Lesther Farol', '09933715629', 'Vanlesther.farol@gmail.com', '$2y$10$xezVOAtVyOzpDNRHmSlwf.RjjdwAi3EUfRcTFhii7JTFWnHxTZJr2', 1, 0),
+(39, 100171, 43, 'TESTVANUSER', '09933715629', 'test@user.van', '$2y$10$7L.Bd80xTME.zGIEj8YCBuAOHvTn0GLesWC8FrpHI0FTKnvEI7FdC', 0, 0),
+(40, 100172, 43, 'user PamG', '09933715629', 'user@pamg.cab', '$2y$10$eBMuzhJGfhp65YgC16SW5OYT2.L7eJGVW17NmpU8pORY4BNUt6dNu', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -424,7 +500,8 @@ ALTER TABLE `pet`
 --
 ALTER TABLE `resident`
   ADD PRIMARY KEY (`residentID`),
-  ADD KEY `geoID` (`geoID`);
+  ADD KEY `geoID` (`geoID`),
+  ADD KEY `brgyID` (`brgyID`);
 
 --
 -- Indexes for table `vaccination`
@@ -452,25 +529,25 @@ ALTER TABLE `barangay`
 -- AUTO_INCREMENT for table `case`
 --
 ALTER TABLE `case`
-  MODIFY `caseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `caseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `geolocation`
 --
 ALTER TABLE `geolocation`
-  MODIFY `geoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100152;
+  MODIFY `geoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100187;
 
 --
 -- AUTO_INCREMENT for table `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `petID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `petID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `resident`
 --
 ALTER TABLE `resident`
-  MODIFY `residentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `residentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `vaccination`
@@ -509,7 +586,8 @@ ALTER TABLE `pet`
 -- Constraints for table `resident`
 --
 ALTER TABLE `resident`
-  ADD CONSTRAINT `resident_ibfk_1` FOREIGN KEY (`geoID`) REFERENCES `geolocation` (`geoID`);
+  ADD CONSTRAINT `resident_ibfk_1` FOREIGN KEY (`geoID`) REFERENCES `geolocation` (`geoID`),
+  ADD CONSTRAINT `resident_ibfk_2` FOREIGN KEY (`brgyID`) REFERENCES `barangay` (`brgyID`);
 
 --
 -- Constraints for table `vaccination`
