@@ -37,7 +37,7 @@ $pets = $pet->getPetsByResidentID($user['residentID']);
             <tbody>
                 <?php foreach ($pets as $pet) { ?>
                     <tr>
-                        <td><?php echo $pet['name']; ?></td>
+                        <td><?php echo $pet['pname']; ?></td>
                         <td><?php echo ($pet['petType'] == 0) ? 'Dog' : 'Cat'; ?></td>
                         <td><?php echo ($pet['sex'] == 0) ? 'Male' : 'Female'; ?></td>
                         <td><?php echo $pet['color']; ?></td>
