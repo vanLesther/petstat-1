@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "petstatvan";
+$servername = "petstat-server.mysql.database.azure.com";
+$username = "pgwsyvsiti";
+$password = "455SGCBRI15EHBWB$";
+$dbname = "petstat-server";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
