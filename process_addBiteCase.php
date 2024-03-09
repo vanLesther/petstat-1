@@ -26,10 +26,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($geoID !== false) {
         $case = new Cases();
 
+<<<<<<< HEAD
         $result = $case->addBiteCase($residentID, $brgyID, $petID, $geoID, $victimsNames, $caseType, $descriptions, $dates, $bpartsBitten, $caseStatus);
         
         if ($result === true) {
             echo '<script>alert("Report Bite Case Successfully"); window.location.href = "./BAOpetdashboard.php?active-tab=2";</script>';
+=======
+        // Replace 'date' with the current date and time using the date function
+        $currentDate = date('Y-m-d H:i:s');
+        //var_dump($currentDate); // Add this line to check the value
+        $result = $case->addBiteCase($residentID, $brgyID, $petName, $geoID, $victimsName, $caseType, $description, $currentDate);
+        
+        if ($result === true) {
+            echo '<script>alert("Report Case Successfully"); window.location.href = "process_addBiteCase.php";</script>';
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         } else {
             echo '<script>alert("Failed to Report Case: ' . $result . '"); window.location.href = "addBiteCase.php";</script>';
         }

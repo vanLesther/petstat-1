@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+<<<<<<< HEAD
 <style>
     body {
         padding: 20px;
@@ -91,10 +92,31 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 </style>
 
 
+=======
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        #map {
+            height: 75vh;
+            width: 75vw;
+            margin: 20px auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .popup-btn {
+            margin-top: 10px;
+        }
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
     </style>
 </head>
 
 <body>
+<<<<<<< HEAD
         <form method="POST" action="./dashboard1.php?active-tab=1" id="heatmapPet">
                 <button type="submit" class="btn btn-primary btn-lg">Back</button>
             </form>
@@ -102,11 +124,19 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         <h2 class="mt-3 mb-4">Resident Location:</h2>
     </div>
     <div class="container">
+=======
+    <div class="container">
+        <h2 class="mt-3 mb-4">Resident Location</h2>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         <div id="map"></div>
     </div>
 
     <script>
+<<<<<<< HEAD
         var map = L.map('map').setView([<?php echo $lat; ?>, <?php echo $lng; ?>], 100);
+=======
+        var map = L.map('map').setView([<?php echo $lat; ?>, <?php echo $lng; ?>], 20);
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
         L.tileLayer('https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=A8yOIIILOal2yE0Rvb63', {
             attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',

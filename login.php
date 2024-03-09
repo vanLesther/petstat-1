@@ -3,15 +3,69 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="petstaticon.png">
     <link rel="stylesheet" href="style.css">
     <?php include 'navbar.php'; ?>
+=======
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #004643;
+            color: #001e1d; /* Text color matches button text color */
+        }
+        .container {
+            max-width: 400px;
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #e8e4e6;
+        }
+        h1 {
+            color: #f9bc60;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #001e1d;
+        }
+        .btn-primary {
+            background-color: #f9bc60;
+            border-color: #f9bc60;
+            color: #001e1d; /* Button text color */
+        }
+        .btn-primary:hover {
+            background-color: #e16162;
+            border-color: #e16162;
+            color: #001e1d; /* Button text color on hover */
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        a.btn-primary {
+            flex: 1; /* Take up equal space */
+            text-align: center; /* Center the text */
+            color: #001e1d; /* Button text color for the link */
+        }
+        a.btn-primary:hover {
+            background-color: #e16162;
+            border-color: #e16162;
+            color: #001e1d; /* Button text color for the link on hover */
+        }
+    </style>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 </head>
 
 <body>

@@ -70,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Manage Resident</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="petstaticon.png">
     <style>
@@ -138,6 +139,164 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 height: 100%;
             }
         }
+=======
+    <style>
+        body {
+            background-color: #004643;
+            color: #fffffe;
+        }
+
+        .a {
+            color:#fffffe;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .tab-content {
+            background-color: #e8e4e6;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .nav-link {
+            color: #007bff;
+        }
+
+        .nav-link.active {
+            color: #ffffff;
+            background-color: #007bff;
+        }
+
+        .btn-view {
+            background-color: #17a2b8;
+            color: #ffffff;
+        }
+
+        .btn-accept {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+
+        .btn-reject {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+
+        .btn-manage {
+            margin-top: 10px;
+            background-color: #f9bc60;
+            color: #001e1d;
+            border-color: #f9bc60;
+        }
+
+        .btn-manage:hover {
+            background-color: #e16162;
+            border-color: #e16162;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Manage Pets for Barangay: <?php echo $result ?></h1>
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#newResidents" data-bs-toggle="tab">New Residents</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#validResidents" data-bs-toggle="tab">Valid Residents</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#rejectedResidents" data-bs-toggle="tab">Rejected Residents</a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- New Residents -->
+            <div class="tab-pane fade show active" id="newResidents">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>View Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $resident = new Resident();
+                        $users = $resident->getAllNewResidents($brgyID);
+
+                        while ($row = $users->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>' . $row['name'] . '</td>';
+                            echo '<td>' . $row['email'] . '</td>';
+                            echo '<td>
+                                     <form method="post" action="proccess_viewResidentLocation.php">
+                                        <input type="hidden" name="userID" value="' . $row['residentID'] . '">
+                                        <button type="submit" name="accept" class="btn btn-view">View Location</button>
+                                    </form>
+                             </td>';
+                            echo '<td>
+                                    <form method="post" action="dashboard1.php">
+                                        <input type="hidden" name="userID" value="' . $row['residentID'] . '">
+                                        <button type="submit" name="accept" class="btn btn-accept">Accept</button>
+                                        <button type="submit" name="reject" class="btn btn-reject">Reject</button>
+                                    </form>
+                                </td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Valid Residents -->
+            <div class="tab-pane fade" id="validResidents">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $resident = new Resident();
+                        $users = $resident->getAllValidResidents($brgyID);
+
+                        while ($row = $users->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>' . $row['name'] . '</td>';
+                            echo '<td>' . $row['email'] . '</td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Rejected Residents -->
+            <div class="tab-pane fade" id="rejectedResidents">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $resident = new Resident();
+                        $users = $resident->getAllRejectedResidents($brgyID);
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
 
 
@@ -656,11 +815,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 </main>
             </div>
+<<<<<<< HEAD
+=======
+            <a href="dashboard1pet.php" class="btn btn-manage">Manage Pet</a>
+            <a href="reportCase.php" class="btn btn-manage">Report Case</a>
+            <a href="dashboardBiteCases.php" class="btn btn-manage">Manage Bite Cases</a>
+            <a href="dashboardDeathCases.php" class="btn btn-manage">Manage Death Cases</a>
+            <a href="logout.php" class="btn btn-manage">Logout</a>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
+<<<<<<< HEAD
 <script>
     $(document).ready(function() {
         $("#newBtn").click(function() {
@@ -694,3 +862,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         return false; // To prevent the form from submitting immediately
     }
 </script>
+=======
+
+</html>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5

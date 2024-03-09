@@ -31,6 +31,14 @@ $user = $_SESSION['user'];
 
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+
+<head>
+    <title>Add Bite Case Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add jQuery library -->
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
 <head>
     <meta charset="UTF-8">
@@ -38,6 +46,7 @@ $user = $_SESSION['user'];
     <title> Bite Case Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
@@ -46,6 +55,8 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="icon" type="image/x-icon" href="petstaticon.png">
+=======
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
     <style>
         body {
@@ -61,6 +72,7 @@ $user = $_SESSION['user'];
         }
 
         h1 {
+<<<<<<< HEAD
             color: black;
             font-weight: bold;
         }
@@ -180,11 +192,15 @@ $user = $_SESSION['user'];
         }
         .modal-dialog{
             width: 100%;
+=======
+            color: #007bff;
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         }
     </style>
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="container-fluid overflow-hidden">
         <div class="row vh-100 overflow-auto">
             <div class="col-12 col-sm-3 shadow-sm bg-gray col-xl-2 px-sm-2 px-0 d-flex sticky-top">
@@ -264,6 +280,17 @@ $user = $_SESSION['user'];
                                     </svg><span class="ms-2 d-none d-sm-inline"> Reports</span></button>
                             </form>
                         </li>
+=======
+    <div class="container">
+        <h1><i class="bi bi-journal"></i> Report Bite Case Form</h1>
+        <form method="POST" action="process_addBiteCase.php" id="reportCaseForm">
+            <div class="mb-3">
+                <label for="petName" class="form-label">Pet Name:</label>
+                <select class="form-select" name="petName" id="petName" required>
+                    <option value="">Select Pet</option>
+                    <?php
+                    global $conn;
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
                         <!-- <li class="nav-item"><a href="viewHeatmaps.php" class="nav-link text-dark">View Heatmaps</a></li> -->
                         <!-- <li class="nav-item">
@@ -787,9 +814,70 @@ $user = $_SESSION['user'];
                     </div>
                 </main>
             </div>
+<<<<<<< HEAD
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+=======
+            <div class="mb-3">
+                <label for="victimsName" class="form-label">Victim Name:</label>
+                <input type="text" class="form-control" name="victimsName" id="victimsName" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <input type="text" class="form-control" name="description" id="description" required>
+            </div>
+            <input type="hidden" name="residentID" id="residentID" value="<?php echo $user['residentID']; ?>">
+            <input type="hidden" name="brgyID" id="brgyID" value="<?php echo $user['brgyID']; ?>">
+            <input type="hidden" name="caseType" id="caseType" value="0">
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+            <button type="button" class="btn btn-primary" onclick="getLocation()">Add Bite Case</button>
+        </form>
+    </div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                // Geolocation is not supported by the browser
+                // Handle the lack of support accordingly
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            document.getElementById("latitude").value = latitude;
+            document.getElementById("longitude").value = longitude;
+
+            document.getElementById("reportCaseForm").submit();
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    // User denied permission
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    // Location information is unavailable
+                    break;
+                case error.TIMEOUT:
+                    // The request to get user location timed out
+                    break;
+                case error.UNKNOWN_ERROR:
+                    // An unknown error occurred
+                    break;
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5

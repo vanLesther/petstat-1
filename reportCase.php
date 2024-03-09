@@ -47,6 +47,7 @@ $residentID = isset($_SESSION['user']['residentID']) ? $_SESSION['user']['reside
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
     <meta charset="UTF-8">
@@ -55,10 +56,19 @@ $residentID = isset($_SESSION['user']['residentID']) ? $_SESSION['user']['reside
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="petstaticon.png">
+=======
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Pet Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
     <style>
         body {
             background-color: #f8f9fa;
         }
+<<<<<<< HEAD
 
         .container {
             margin-top: 50px;
@@ -82,12 +92,34 @@ $residentID = isset($_SESSION['user']['residentID']) ? $_SESSION['user']['reside
 
         .modal-dialog {
             margin: 0 auto;
+=======
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         }
     </style>
 </head>
 
 
 <body>
+<<<<<<< HEAD
     <div class="row vh-100" style="width: 100%;">
         <div class="col-md-3  shadow-sm p-3 mb-5 bg-white rounded .col-sm-1 .col-lg-2 d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
             <div class="left-sidebar--sticky-container js-sticky-leftnav">
@@ -264,9 +296,28 @@ $residentID = isset($_SESSION['user']['residentID']) ? $_SESSION['user']['reside
             </div>
         </div>
     </div>
+=======
+    <div class="container">
+        <h1>Report a Case</h1>
+        <div class="mb-3">
+            <form method="POST" action="addBiteCase.php" id="reportBiteCaseForm">
+                <button type="submit" class="btn btn-primary btn-lg">Report Bite Case</button>
+            </form>
+        </div>
+        <div class="mb-3">
+            <form method="POST" action="addDeathCase.php" id="reportDeathCaseForm">
+                <button type="submit" class="btn btn-primary btn-lg">Report Death Case</button>
+            </form>
+        </div>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
+<<<<<<< HEAD
 
 </html>
+=======
+</html>
+
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5

@@ -20,10 +20,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $notifType = $_POST['notifType'];
     $notifMessage = $_POST['notifMessage'];
 
+<<<<<<< HEAD
     $regDate = date('Y-m-d H:i:s');
     $notifDate = date('Y-m-d H:i:s');
     $pet = new Pet();
     $notif = new Notification();
+=======
+$currentDate = date('Y-m-d H:i:s');
+//  var_dump($currentDate); // Add this line to check the value
+$pet = new Pet();
+$newPet = $pet->addPet($residentID, $petType, $name, $sex, $color, $currentDate);
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
     $newPet = $pet->addPetRes($residentID, $petType, $pname, $sex, $neutering, $color, $vetVac, $age, $regDate, $statusVac, $pdescription);
     $addNotif = $notif->addPetNotif($brgyID, $residentID, $notifType, $notifDate, $notifMessage);

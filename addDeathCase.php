@@ -8,12 +8,16 @@ if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
+<<<<<<< HEAD
 if (isset($_POST['userType'])) {
     // Retrieve the brgyID
     $userType = $_POST['userType'];
 
     // Now, you can use $brgyID as needed
 }
+=======
+
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 $brgyID = isset($_SESSION['user']['brgyID']) ? $_SESSION['user']['brgyID'] : '';
 $residentID = isset($_SESSION['user']['residentID']) ? $_SESSION['user']['residentID'] : '';
 // Get the user's information from the session
@@ -24,15 +28,20 @@ $user = $_SESSION['user'];
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
     <title>Report Death Case Form</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+=======
+    <title>Add Bite Case Form</title>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Add jQuery library -->
 
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="petstaticon.png">
 
@@ -141,11 +150,30 @@ $user = $_SESSION['user'];
         }
         img{
             align-items: end;
+=======
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         }
     </style>
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="container-fluid overflow-hidden">
         <div class="row vh-100 overflow-auto">
             <div class="col-12 col-sm-3 shadow-sm bg-gray col-xl-2 px-sm-2 px-0 d-flex sticky-top">
@@ -398,3 +426,85 @@ $user = $_SESSION['user'];
 </body>
 
 </html>
+=======
+    <div class="container">
+        <h1><i class="bi bi-journal"></i> Report Death Case Form</h1>
+        <form method="POST" action="process_addDeathCase.php" id="reportCaseForm">
+            <div class="mb-3">
+                <label for="petName" class="form-label">Pet Name:</label>
+                <select class="form-select" name="petName" id="petName" required>
+                    <option value="">Select Pet</option>
+                    <?php
+                    global $conn;
+
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    $sql = "SELECT pname FROM pet  WHERE residentID=? AND status =1";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $residentID);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . $row["pname"] . '">' . $row["pname"] . '</option>';
+                        }
+                    } else {
+                        echo '<option value="">No pets found</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <input type="hidden" name="residentID" id="residentID" value="<?php echo $user['residentID']; ?>">
+            <input type="hidden" name="brgyID" id="brgyID" value="<?php echo $user['brgyID']; ?>">
+            <input type="hidden" name="caseType" id="caseType" value="1">
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+            <input type="submit" value="Add Death Case" class="btn btn-primary" btn-lg onclick="getLocation()">
+        </form>
+    </div>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                // Geolocation is not supported by the browser
+                // Handle the lack of support accordingly
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            document.getElementById("latitude").value = latitude;
+            document.getElementById("longitude").value = longitude;
+
+            document.getElementById("reportCaseForm").submit();
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    // User denied permission
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    // Location information is unavailable
+                    break;
+                case error.TIMEOUT:
+                    // The request to get user location timed out
+                    break;
+                case error.UNKNOWN_ERROR:
+                    // An unknown error occurred
+                    break;
+            }
+        }
+    </script>
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5

@@ -5,6 +5,7 @@ class Pet {
     private $conn;
 
 
+<<<<<<< HEAD
     public function addPet($residentID, $petType, $pname, $sex, $neutering, $color, $vetVac, $age, $regDate, $currentVac, $statusVac, $pdescription, $status) {
         global $conn;
     
@@ -12,6 +13,26 @@ class Pet {
         $existingPet = $this->getPetByDetails($residentID, $pname, $sex, $color, $age);
         if ($existingPet) {
             return true; // Pet already exists, return success
+=======
+    public function addPet($residentID, $petType, $name, $sex, $color, $currentDate) {
+        global $conn;
+        try {
+            $stmt = $conn->prepare("INSERT INTO pet (residentID, petType, pname, sex, color, petDate)
+                                         VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("iissss", $residentID, $petType, $name, $sex, $color, $currentDate);
+            $stmt->execute();
+    
+            if ($stmt->affected_rows > 0) {
+                $stmt->close();
+                return true; // Case added successfully
+            } else {
+                $stmt->close();
+                return "Failed to add the case to the database.";
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         }
     
         // Prepare the SQL statement for inserting into the "pet" table

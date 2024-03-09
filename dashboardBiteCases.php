@@ -109,6 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Manage Bite Cases</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+<<<<<<< HEAD
     <link rel="icon" type="image/x-icon" href="petstaticon.png">
     <style>
         body {
@@ -169,6 +170,83 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         
+=======
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .tab-content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .nav-link {
+            color: #007bff;
+        }
+
+        .nav-link.active {
+            color: #ffffff;
+            background-color: #007bff;
+        }
+
+        .btn-accept {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+
+        .btn-reject {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+
+        .btn-manage {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Manage Bite Cases for Barangay: <?php echo $result1 ?></h1>
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#newBiteCase" data-bs-toggle="tab">New Bite Cases</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#validBiteCase" data-bs-toggle="tab">Valid Bite Cases</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#rejectedBiteCase" data-bs-toggle="tab">Rejected Bite Cases</a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- New Bite Cases Tab -->
+            <div class="tab-pane fade show active" id="newBiteCase">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Pet Name</th>
+                            <th>Victim's Name</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $case = new Cases();
+                        $cases = $case->getAllNewBiteCase($brgyID);
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
 
         @media (min-width: 576px) {
@@ -178,6 +256,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
 
+<<<<<<< HEAD
 
         .chart-container {
             display: flex;
@@ -573,6 +652,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         </div>
                                     </div>
                                 </div>
+=======
+                            // Print the formatted date
+                            echo '<td>' . $formatted_date . '</td>';
+                            echo '<td>
+                                    <form method="post" action="dashboardBiteCases.php">
+                                        <input type="hidden" name="caseID" value="' . $row['caseID'] . '">
+                                        <button type="submit" name="verify" class="btn btn-accept">Accept</button>
+                                        <button type="submit" name="reject" class="btn btn-reject">Reject</button>
+                                    </form>
+                                </td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Valid Bite Cases Tab -->
+            <div class="tab-pane fade" id="validBiteCase">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Pet Name</th>
+                            <th>Victim's Name</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $case = new Cases();
+                        $cases = $case->getAllValidBiteCase($brgyID);
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
 
 
@@ -599,6 +709,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                                         $case = new Cases();
                                                         $items_per_page_rejected_bite = 8; // Number of items per page
 
+<<<<<<< HEAD
                                                         // Get total number of rejected bite cases
                                                         $total_items_rejected_bite = count($case->getAllRejectedBiteCase($brgyID));
                                                         $total_pages_rejected_bite = ceil($total_items_rejected_bite / $items_per_page_rejected_bite);
@@ -653,6 +764,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </main>
             </div>
         </div>
+=======
+                            // Print the formatted date
+                            echo '<td>' . $formatted_date . '</td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Rejected Bite Cases Tab -->
+            <div class="tab-pane fade" id="rejectedBiteCase">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Pet Name</th>
+                            <th>Victim's Name</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $case = new Cases();
+                        $cases = $case->getAllRejectedBiteCase($brgyID);
+
+                        while ($row = $cases->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>' . $row['pname'] . '</td>';
+                            echo '<td>' . $row['victimsName'] . '</td>';
+                            $input_date = $row['date'];
+
+                            // Convert the input date to a DateTime object
+                            $date_obj = new DateTime($input_date);
+
+                            // Format the date as "Month Day, Year"
+                            $formatted_date = $date_obj->format("F j, Y");
+
+                            // Print the formatted date
+                            echo '<td>' . $formatted_date . '</td>';
+                            echo '</tr>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a href="dashboard1.php" class="btn btn-primary btn-manage">Manage User</a>
+        <a href="logout.php" class="btn btn-primary btn-manage">Logout</a>
+    </div>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
 
 
@@ -688,4 +849,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5

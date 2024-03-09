@@ -302,6 +302,7 @@ public function updateBiteCaseStatus($caseID, $caseStatus){
 public function getAllNewDeathCase($brgyID) {
     global $conn;
 
+<<<<<<< HEAD
     try {
         $query = "SELECT c.*, p.* , r.* FROM `case` c JOIN pet p ON c.petID = p.petID LEFT JOIN resident as r ON c.residentID = r.residentID WHERE c.caseStatus = 0 AND c.caseType = 1 AND c.brgyID = ? ORDER BY c.date DESC";
         $stmt = $conn->prepare($query);
@@ -320,10 +321,25 @@ public function getAllNewDeathCase($brgyID) {
     }
 }
 
+=======
+    $query = "SELECT c.*, p.* FROM `case` c JOIN pet p ON c.petID = p.petID WHERE c.caseStatus = 0 AND c.caseType = 1 AND c.barangayID = ?;";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $brgyID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (!$result) {
+        return false; // Return false if the query fails
+    }
+
+    return $result;
+}
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 
 public function getAllValidDeathCase($brgyID) {
     global $conn;
 
+<<<<<<< HEAD
     try {
         $query = "SELECT c.*, p.* FROM `case` c JOIN pet p ON c.petID = p.petID WHERE c.caseStatus = 1 AND c.caseType = 1 AND c.brgyID = ? ORDER BY c.date DESC";
         $stmt = $conn->prepare($query);
@@ -340,11 +356,25 @@ public function getAllValidDeathCase($brgyID) {
         echo "Error: " . $e->getMessage();
         return false;
     }
+=======
+    $query = "SELECT c.*, p.* FROM `case` c JOIN pet p ON c.petID = p.petID WHERE c.caseStatus = 1 AND c.caseType = 1 AND c.barangayID = ?;";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $brgyID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (!$result) {
+        return false; // Return false if the query fails
+    }
+
+    return $result;
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 }
 
 public function getAllRejectedDeathCase($brgyID) {
     global $conn;
 
+<<<<<<< HEAD
     try {
         $query = "SELECT c.*, p.* FROM `case` c JOIN pet p ON c.petID = p.petID WHERE c.caseStatus = 2 AND c.caseType = 1 AND c.brgyID = ? ORDER BY c.date DESC";
         $stmt = $conn->prepare($query);
@@ -361,6 +391,19 @@ public function getAllRejectedDeathCase($brgyID) {
         echo "Error: " . $e->getMessage();
         return false;
     }
+=======
+    $query = "SELECT c.*, p.* FROM `case` c JOIN pet p ON c.petID = p.petID WHERE c.caseStatus = 2 AND c.caseType = 1 AND c.barangayID = ?;";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $brgyID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (!$result) {
+        return false; // Return false if the query fails
+    }
+
+    return $result;
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 }
 
 
@@ -386,6 +429,7 @@ try {
     $stmt->close();
 }
 }
+<<<<<<< HEAD
 public function addDeathCase($residentID, $brgyID, $petID, $geoID, $caseType, $description, $cdate, $CRabies, $caseStatus) {
     global $conn; 
 
@@ -398,6 +442,20 @@ public function addDeathCase($residentID, $brgyID, $petID, $geoID, $caseType, $d
         $stmt = $conn->prepare("INSERT INTO `case` (residentID, brgyID, petID, caseGeoID, caseType, description, date, confirmedRabies, caseStatus)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("iiiiissii", $residentID, $brgyID, $petID, $geoID, $caseType, $description, $cdate, $CRabies, $caseStatus);
+=======
+public function addDeathCase($residentID, $brgyID, $petName, $geoID, $caseType, $currentDate) {
+    global $conn;
+    try {
+        $petID = $this->getPetIDByName($petName);
+
+        if (!$petID ==true) {
+            return "Pet or owner not found in the database.";
+        }
+
+        $stmt = $conn->prepare("INSERT INTO `case` (residentID, barangayID, petID, caseGeoID, caseType, date)
+        VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iiiiis", $residentID, $brgyID, $petID, $geoID, $caseType, $currentDate);
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
@@ -412,6 +470,7 @@ public function addDeathCase($residentID, $brgyID, $petID, $geoID, $caseType, $d
         return false;
     }
 }
+<<<<<<< HEAD
 
 public function addDeathCaseRes($residentID, $brgyID, $petID, $geoID, $caseType, $description, $cdate, $CRabies) {
     global $conn; 
@@ -903,5 +962,7 @@ ORDER BY
 
     return $counts3;
 }
+=======
+>>>>>>> 38bffb789855535e6bf20eccf3ecc7df94f3eed5
 }
 ?>
